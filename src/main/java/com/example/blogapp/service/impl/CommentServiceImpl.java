@@ -4,6 +4,7 @@ import com.example.blogapp.entity.Comment;
 import com.example.blogapp.entity.Post;
 import com.example.blogapp.exception.BlogAPIException;
 import com.example.blogapp.exception.ResourceNotFoundException;
+import com.example.blogapp.mapper.CommentMapper;
 import com.example.blogapp.payload.CommentDto;
 import com.example.blogapp.repository.CommentRepository;
 import com.example.blogapp.repository.PostRepository;
@@ -22,6 +23,7 @@ public class CommentServiceImpl implements CommentService {
     private CommentRepository  commentRepository;
     private PostRepository postRepository;
     private ModelMapper modelMapper;
+    private CommentMapper commentMapper;
 
     @Autowired
     public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository, ModelMapper modelMapper) {
@@ -97,11 +99,17 @@ public class CommentServiceImpl implements CommentService {
     }
 
 
+
     private CommentDto mapToDto(Comment comment) {
         return modelMapper.map(comment, CommentDto.class);
+//        return commentMapper.mapToCommentDto(comment);
     }
+
+
 
     private Comment mapToEntity(CommentDto commentDto) {
         return modelMapper.map(commentDto, Comment.class);
+//        return commentMapper.mapToComment(commentDto);
     }
+
 }

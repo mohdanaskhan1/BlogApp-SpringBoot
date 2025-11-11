@@ -1,14 +1,17 @@
 package com.example.blogapp.payload;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder(toBuilder = true)
 public class CommentDto {
     private Long id;
+
+    @NotEmpty(message = "Name Should not be Empty")
     private String name;
     private String email;
     private String body;

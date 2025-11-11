@@ -2,7 +2,7 @@ package com.example.blogapp.service.impl;
 
 import com.example.blogapp.entity.Post;
 import com.example.blogapp.exception.ResourceNotFoundException;
-import com.example.blogapp.payload.CommentDto;
+import com.example.blogapp.mapper.CommentMapper;
 import com.example.blogapp.payload.PostDto;
 import com.example.blogapp.payload.PostResponse;
 import com.example.blogapp.repository.PostRepository;
@@ -46,7 +46,7 @@ public class PostServiceImpl implements com.example.blogapp.service.PostService 
         //get content from page object
         List<Post> listOfPosts = posts.getContent();
         List<PostDto> content = listOfPosts.stream()
-                .map(post -> mapToDTO(post))
+                .map(this::mapToDTO)
                 .collect(Collectors.toList());
         PostResponse postResponse = new PostResponse();
         postResponse.setContent(content);
@@ -56,8 +56,6 @@ public class PostServiceImpl implements com.example.blogapp.service.PostService 
         postResponse.setTotalElements(posts.getTotalElements());
         postResponse.setLast(posts.isLast());
         return postResponse;
-
-
     }
 
     @Override
@@ -86,19 +84,10 @@ public class PostServiceImpl implements com.example.blogapp.service.PostService 
 
 
     private PostDto mapToDTO(Post post) {
-//        PostDto postDto = new PostDto();
-//        postDto.setId(post.getId());
-//        postDto.setTitle(post.getTitle());
-//        postDto.setDescription(post.getDescription());
-//        postDto.setContent(post.getContent());
         return modelMapper.map(post, PostDto.class);
     }
 
     private Post mapToEntity(PostDto postDto) {
-//        Post post = new Post();
-//        post.setTitle(postDto.getTitle());
-//        post.setDescription(postDto.getDescription());
-//        post.setContent(postDto.getContent());
         return modelMapper.map(postDto, Post.class);
     }
 }
