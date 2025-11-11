@@ -4,7 +4,6 @@ import com.example.blogapp.entity.Comment;
 import com.example.blogapp.entity.Post;
 import com.example.blogapp.exception.BlogAPIException;
 import com.example.blogapp.exception.ResourceNotFoundException;
-import com.example.blogapp.mapper.CommentMapper;
 import com.example.blogapp.payload.CommentDto;
 import com.example.blogapp.repository.CommentRepository;
 import com.example.blogapp.repository.PostRepository;
