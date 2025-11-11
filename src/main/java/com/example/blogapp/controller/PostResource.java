@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/posts")
 public class PostResource {
 
-    private PostService postService;
+    private final PostService postService;
+
 
     public PostResource(PostService postService) {
         this.postService = postService;

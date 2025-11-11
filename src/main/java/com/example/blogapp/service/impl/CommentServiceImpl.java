@@ -20,10 +20,9 @@ import java.util.stream.Collectors;
 @Service
 public class CommentServiceImpl implements CommentService {
 
-    private CommentRepository  commentRepository;
-    private PostRepository postRepository;
-    private ModelMapper modelMapper;
-    private CommentMapper commentMapper;
+    private final CommentRepository  commentRepository;
+    private final PostRepository postRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository, ModelMapper modelMapper) {

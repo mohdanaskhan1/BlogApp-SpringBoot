@@ -1,8 +1,6 @@
 package com.example.blogapp.payload;
 
-import com.example.blogapp.entity.Comment;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 

@@ -2,7 +2,6 @@ package com.example.blogapp.service.impl;
 
 import com.example.blogapp.entity.Post;
 import com.example.blogapp.exception.ResourceNotFoundException;
-import com.example.blogapp.mapper.CommentMapper;
 import com.example.blogapp.payload.PostDto;
 import com.example.blogapp.payload.PostResponse;
 import com.example.blogapp.repository.PostRepository;
@@ -20,9 +19,9 @@ import java.util.stream.Collectors;
 @Service
 public class PostServiceImpl implements com.example.blogapp.service.PostService {
 
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper) {
