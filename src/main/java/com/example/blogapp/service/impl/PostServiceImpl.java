@@ -46,21 +46,21 @@ public class PostServiceImpl implements com.example.blogapp.service.PostService 
         List<Post> listOfPosts = posts.getContent();
         List<PostDto> content = listOfPosts.stream()
                 .map(this::mapToDTO)
-                .collect(Collectors.toList());
-        PostResponse postResponse = new PostResponse();
-        postResponse.setContent(content);
-        postResponse.setPageNo(posts.getNumber());
-        postResponse.setPageSize(posts.getSize());
-        postResponse.setTotalPages(posts.getTotalPages());
-        postResponse.setTotalElements(posts.getTotalElements());
-        postResponse.setLast(posts.isLast());
-        return postResponse;
+                .toList();
+        return PostResponse.builder()
+                .content(content)
+                .pageNo(posts.getNumber())
+                .pageSize(posts.getSize())
+                .totalPages(posts.getTotalPages())
+                .totalElements(posts.getTotalElements())
+                .last(posts.isLast())
+                .build();
     }
 
     @Override
     public PostDto getPostsById(Long id) {
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Post", "id" , id));
+                .orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
         return mapToDTO(post);
     }
 
@@ -80,7 +80,6 @@ public class PostServiceImpl implements com.example.blogapp.service.PostService 
                 .orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
         postRepository.delete(post);
     }
-
 
     private PostDto mapToDTO(Post post) {
         return modelMapper.map(post, PostDto.class);

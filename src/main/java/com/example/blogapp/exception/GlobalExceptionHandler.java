@@ -23,7 +23,6 @@ public class GlobalExceptionHandler {
                 ex.getMessage(),
                 request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
-
     }
 
     @ExceptionHandler(value = BlogAPIException.class)
@@ -39,27 +38,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, WebRequest request) {
         HashMap<String, Object> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError)error).getField();
+        ex.getBindingResult().getAllErrors().forEach(error -> {
+            String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
-
-//    @Override
-//    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-//                                                               HttpHeaders headers,
-//                                                               HttpStatusCode status,
-//                                                               WebRequest request) {
-//        HashMap<String, Object> errors = new HashMap<>();
-//        ex.getBindingResult().getAllErrors().forEach((error) -> {
-//            String fieldName = ((FieldError)error).getField();
-//            String errorMessage = error.getDefaultMessage();
-//            errors.put(fieldName, errorMessage);
-//        });
-//        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
-//    }
 
     //global exception
 

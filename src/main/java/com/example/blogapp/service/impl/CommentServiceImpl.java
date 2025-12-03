@@ -13,13 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService {
 
-    private final CommentRepository  commentRepository;
+    private final CommentRepository commentRepository;
     private final PostRepository postRepository;
     private final ModelMapper modelMapper;
 
@@ -29,7 +29,6 @@ public class CommentServiceImpl implements CommentService {
         this.postRepository = postRepository;
         this.modelMapper = modelMapper;
     }
-
 
     @Override
     public CommentDto createComment(Long postId, CommentDto commentDto) {
@@ -96,18 +95,12 @@ public class CommentServiceImpl implements CommentService {
         return mapToDto(commentRepository.save(comment));
     }
 
-
-
     private CommentDto mapToDto(Comment comment) {
         return modelMapper.map(comment, CommentDto.class);
-//        return commentMapper.mapToCommentDto(comment);
     }
-
-
 
     private Comment mapToEntity(CommentDto commentDto) {
         return modelMapper.map(commentDto, Comment.class);
-//        return commentMapper.mapToComment(commentDto);
     }
 
 }
