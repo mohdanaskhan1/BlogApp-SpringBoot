@@ -15,7 +15,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/")
-
 @Tag(
         name = "Comment Resource APIs",
         description = "CRUD REST APIs for managing comments belonging to blog posts"

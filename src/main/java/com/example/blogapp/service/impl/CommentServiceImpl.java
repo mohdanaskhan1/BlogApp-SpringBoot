@@ -9,7 +9,6 @@ import com.example.blogapp.repository.CommentRepository;
 import com.example.blogapp.repository.PostRepository;
 import com.example.blogapp.service.CommentService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,6 @@ public class CommentServiceImpl implements CommentService {
     private final PostRepository postRepository;
     private final ModelMapper modelMapper;
 
-    @Autowired
     public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository, ModelMapper modelMapper) {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
@@ -96,6 +94,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     private CommentDto mapToDto(Comment comment) {
+
         return modelMapper.map(comment, CommentDto.class);
     }
 

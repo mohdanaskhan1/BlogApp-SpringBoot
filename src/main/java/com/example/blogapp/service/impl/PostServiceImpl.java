@@ -6,7 +6,6 @@ import com.example.blogapp.payload.PostDto;
 import com.example.blogapp.payload.PostResponse;
 import com.example.blogapp.repository.PostRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements com.example.blogapp.service.PostService {
@@ -23,7 +21,6 @@ public class PostServiceImpl implements com.example.blogapp.service.PostService 
 
     private final ModelMapper modelMapper;
 
-    @Autowired
     public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper) {
         this.postRepository = postRepository;
         this.modelMapper = modelMapper;

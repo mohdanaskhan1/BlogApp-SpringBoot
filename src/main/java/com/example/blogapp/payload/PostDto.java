@@ -38,4 +38,7 @@ public class PostDto {
     @Schema(description = "List of comments associated with the post")
     private Set<CommentDto> comments;
 
+    @Schema(description = "ID of the category this post belongs to")
+    private Long categoryId;
+
 }
