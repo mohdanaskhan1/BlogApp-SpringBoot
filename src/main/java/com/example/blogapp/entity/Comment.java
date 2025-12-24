@@ -7,7 +7,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Builder(toBuilder = true)
 @Entity
 @Table(name = "comments")

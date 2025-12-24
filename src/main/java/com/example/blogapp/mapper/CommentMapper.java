@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommentMapper {
     public Comment toEntity(CommentDto commentDto) {
-        if (commentDto==null) return null;
+        if (commentDto == null) return null;
         return Comment.builder()
                 .id(commentDto.getId())
                 .name(commentDto.getName())
@@ -17,7 +17,7 @@ public class CommentMapper {
     }
 
     public CommentDto toDTO(Comment comment) {
-        if (comment==null) return null;
+        if (comment == null) return null;
         return CommentDto.builder()
                 .id(comment.getId())
                 .name(comment.getName())
