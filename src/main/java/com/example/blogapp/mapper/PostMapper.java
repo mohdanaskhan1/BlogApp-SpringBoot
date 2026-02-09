@@ -6,9 +6,12 @@ import com.example.blogapp.payload.PostDto;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 @Component
 public class PostMapper {
+
+    private final CommentMapper commentMapper = new CommentMapper();
 
     public Post toEntity(PostDto dto, Category category) {
         if (dto == null) return null;
@@ -31,6 +34,9 @@ public class PostMapper {
                 .description(post.getDescription())
                 .content(post.getContent())
                 .categoryId(post.getCategory() != null ? post.getCategory().getId() : null)
+                .comments(post.getComments().stream()
+                        .map(commentMapper::toDTO)
+                        .collect(Collectors.toSet()))
                 .build();
     }
 
