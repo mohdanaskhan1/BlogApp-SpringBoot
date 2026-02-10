@@ -1,6 +1,8 @@
 package com.example.blogapp.config;
 
+import com.example.blogapp.repository.UserRegisterEntityRepository;
 import com.example.blogapp.security.JWTAuthenticationFilter;
+import com.example.blogapp.security.JWTRefreshFilter;
 import com.example.blogapp.security.JWTUtil;
 import com.example.blogapp.security.JWTValidationFilter;
 import org.springframework.context.annotation.Bean;
@@ -23,10 +25,12 @@ public class SecurityConfig {
 
     private final JWTUtil jwtUtil;
     private final UserDetailsService userDetailsService;
+    private final UserRegisterEntityRepository userRepo;
 
-    public SecurityConfig(JWTUtil jwtUtil, UserDetailsService userDetailsService) {
+    public SecurityConfig(JWTUtil jwtUtil, UserDetailsService userDetailsService, UserRegisterEntityRepository userRepo) {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
+        this.userRepo = userRepo;
     }
 
 
@@ -42,15 +46,23 @@ public class SecurityConfig {
 
         //Validation filter for checking JWT in every request
         JWTValidationFilter jwtValidationFilter = new JWTValidationFilter(this.jwtUtil, userDetailsService);
+
+        //refresh filter for checking JWT in every request
+        JWTRefreshFilter jwtRefreshFilter = new JWTRefreshFilter(this.jwtUtil, userRepo);
+
+
         http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/user-register", "/login").permitAll()
+                        .requestMatchers("/api/user-register", "/generate-token","/refresh-token").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(AbstractHttpConfigurer::disable)
-                .addFilterBefore(jwtValidationFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterAt(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class) // Generate Token Filter
+                .addFilterAfter(jwtValidationFilter, JWTAuthenticationFilter.class) // Validate Token Filter
+                .addFilterAfter(jwtRefreshFilter, JWTValidationFilter.class); //refresh token filter
+
+        //Auth -> Validation -> UserName
         return http.build();
     }
 
