@@ -1,7 +1,7 @@
 package com.example.blogapp.controller;
 
 import com.example.blogapp.entity.UserRegisterEntity;
-import com.example.blogapp.service.impl.UserRegisterEntityService;
+import com.example.blogapp.security.UserRegisterEntityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,4 +35,5 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return "fetched user data successfully";
     }
+
 }

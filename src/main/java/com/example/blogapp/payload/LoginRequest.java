@@ -1,4 +1,4 @@
-package com.example.blogapp.security;
+package com.example.blogapp.payload;
 
 public class LoginRequest {
     private String username;

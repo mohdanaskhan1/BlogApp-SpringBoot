@@ -1,4 +1,4 @@
-package com.example.blogapp.service.impl;
+package com.example.blogapp.security;
 
 import com.example.blogapp.entity.UserRegisterEntity;
 import com.example.blogapp.repository.UserRegisterEntityRepository;

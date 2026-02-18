@@ -1,5 +1,6 @@
 package com.example.blogapp.security;
 
+import com.example.blogapp.payload.LoginRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -38,6 +39,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         if (authResult.isAuthenticated()) {
             String token = jwtUtil.generateToken(authResult.getName(), 15);
             response.setHeader("Authorization", "Bearer " + token);
+
 
             String refreshToken = jwtUtil.generateToken(authResult.getName(), 7 * 24 * 60);// 7 Days
             //Set Refresh Token in HttpOnly Cookies

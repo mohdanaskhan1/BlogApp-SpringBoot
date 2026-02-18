@@ -21,13 +21,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class WebSecurityConfig {
 
     private final JWTUtil jwtUtil;
     private final UserDetailsService userDetailsService;
     private final UserRegisterEntityRepository userRepo;
 
-    public SecurityConfig(JWTUtil jwtUtil, UserDetailsService userDetailsService, UserRegisterEntityRepository userRepo) {
+    public WebSecurityConfig(JWTUtil jwtUtil, UserDetailsService userDetailsService, UserRegisterEntityRepository userRepo) {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
         this.userRepo = userRepo;
